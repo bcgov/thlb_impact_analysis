@@ -8,7 +8,8 @@ areas.
 
 >[!Note]
 >There are important terms relevant to understanding this analysis:
-><strong>[Gross Land Base (GLB)](Tenure Area / Total Area)</strong>
-><strong>Forest Management Land Base (FMLB):</strong>
-><strong>Legally Harvestable Land Base (LHLB):</strong>
-><strong>Timber Harvesting Land Base (THLB):</strong>
+><strong>Gross Land Base (GLB):</strong>Tenure Area or Total Area<br />
+><strong>Forest Management Land Base (FMLB):</strong> Forested Area that contributes to forest management objectives (GLB, minus water, long term leases, other tenures, non forested areas)<br />
+><strong>Legally Harvestable Land Base (LHLB):</strong> Area within the FMLB where timber harvesting is legal, subject to forest mamagement objectives and requiremnets. 
+><strong>Timber Harvesting Land Base (THLB): </strong>Area within the THLB where it is economical to harvest under current management practices (LHLB minus environmentally sensitive areas, steep slopes, non merchantable timber, etc.)
+
