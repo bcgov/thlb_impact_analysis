@@ -65,7 +65,7 @@ procedure:
 - (optional) Join the resulting summary statistcs table back to the original input polygon to attach the summary results back to the proposed WHAs.
 
 >[!Important]
->The process above describee the basic steps to perform a THLB analysis request. It is common for clients to want more detailed information. For example, a client might want to know the breakdown of THLB impact baed on Mature/Immature Forests (which uses the VRI Proj_Age_1 attribute), The breakdown by different administrative areas, and the breakdown by Old Growth Defferal Area (OGDA) or Non-OGDA. These requests can by accomodated by performing additional **Identify** functins and then including those categories in the **CASE** section of the **Summary Statistics** tool.
+>The process above describee the basic steps to perform a THLB analysis request. It is common for clients to ask for more detailed information. For example, a client might want to know the breakdown of THLB impact based on Mature/Immature Forests (which uses the **VRI Proj_Age_1 attribute**), The breakdown by different administrative areas, and the breakdown by Old Growth Defferal Area (OGDA) or Non-OGDA. These requests can by accomodated by performing additional **Identify** functions and then including those categories in the **CASE** section of the **Summary Statistics** tool.
 
 <!-- 
 - Sapsucker
