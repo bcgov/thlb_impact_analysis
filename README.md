@@ -47,10 +47,10 @@ procedure:
 
 **Prepare the THLB Data**
 - The proxyTHLB Data must be merged with the provincial thlb data. This requires a few steps:
-    - The raster cells contain point values, but to convert to vector, they need to be integers. To accomplish this, use the **Raster Calculator** and apply the forumula **Int("cell_value" * 1000)**
+    - The raster cells contain float values, but to convert to vector, they need to be integers. To accomplish this, use the **Raster Calculator** and apply the forumula **Int("cell_value" * 1000)**
     - Then use the **Raster to Polygon** function to convert your raster. Make sure **NOT** to simplfy the output. 
     - Once your raster data is converted, create a new field in the polygon feature class called **thlb_fact** and calculate it's value as **float(!cell_calue / 1000)** to convert back to a float.
-    - You can now clip this feature class to your area of interest, and then **merge** the proxyTHLB feature class with the provincial thlb feature class. Make sure that you are usig the appropriatie field mappings during ther merge.
+    - You can now clip this feature class to your area of interest, and then **merge** the proxyTHLB feature class with the provincial thlb feature class. Make sure that you are using the appropriatie field mappings during the merge. There should be a single **thlb_fact** column in your resulting feature class.
 
 >[!Note]
 >Some clients have additional requests for their THLB analysis. For example, they may like to see the impact of their WHA divided by which Timber Supply Area or TFL they are in. In the identify steps below, you can repeat the process with the necessary feature classes. 
@@ -65,7 +65,7 @@ procedure:
 - (optional) Join the resulting summary statistcs table back to the original input polygon to attach the summary results back to the proposed WHAs.
 
 >[!Important]
->The process above described the basic steps to perform a THLB analysis request. It is not uncommon for clients to want more detailed information. For example, a client might want to know the breakdown of THLB impact baed on Mature/Immature Forests (which uses the VRI Proj_Age_1 attribute), The breakdown by different administrative areas, and the breakdown by Old Growth Defferal Area (OGDA) or Non-OGDA. These requests can by accomodated by performing additional **Identify** functins and then including those categories in the **CASE** section of the **Summary Statistics** tool.
+>The process above describee the basic steps to perform a THLB analysis request. It is common for clients to want more detailed information. For example, a client might want to know the breakdown of THLB impact baed on Mature/Immature Forests (which uses the VRI Proj_Age_1 attribute), The breakdown by different administrative areas, and the breakdown by Old Growth Defferal Area (OGDA) or Non-OGDA. These requests can by accomodated by performing additional **Identify** functins and then including those categories in the **CASE** section of the **Summary Statistics** tool.
 
 <!-- 
 - Sapsucker
