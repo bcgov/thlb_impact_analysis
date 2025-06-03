@@ -32,17 +32,40 @@ The Provincial THLB Data comes in polygon format and contains several unique fie
 - **thlb_area_ha**: This is the area of the polygon multiplied by the thlb_fact and should represent the amount of harvestable land in hectares within the associated polygon.
 
 The proxyTHLB Data comes in raster format and contains just the single value:
-- **thlb_fact**: A Float Value, between 0 and 1, representing the amount of forest within the associated polygon which contains harvestable timber. For example, a 1ha pixel with a tblb_fact of 0.75 would contain 0.75ha of merchantable timber.
-
+- **thlb_fact**: A Float Value, between 0 and 1, representing the amount of forest within the associated pixel which contains harvestable timber. For example, a 1ha pixel with a tblb_fact of 0.75 would contain 0.75ha of merchantable timber.
 
 In addition to the THLB data, you will require **input geometries** (ie, your
-area of interest). 
-
-
+area of interest). Some parts of the analyis also require **VRI (R1)** for determining forest age. 
 
 ## Manual Process
 This analysis was first produced **Manually** In ArcGIS Pro using the following 
 procedure:
+
+**Prepare the Workspace**
+1. Create an Area of Interest Surrounding all your polygons (in this case, proposed WHAs) and clip all input data to those AOEs. This will help in reducing processing time for all future steps.
+2. Ensure the workspace environmnet settings have the projection set to BC Albers.
+
+**Prepare the THLB Data**
+3. The proxyTHLB Data must be merged with the provincial thlb data. This requires a few steps:
+    - The raster cells contain point values, but to convert to vector, they need to be integers. To accomplish this, use the **Raster Calculator** and apply the forumula **Int("cell_value" * 1000)**
+    - Then use the **Raster to Polygon** function to convert your raster. Make sure **NOT** to simplfy the output. 
+    - Once your raster data is converted, create a new field in the polygon feature class called **thlb_fact** and calculate it's value as **float(!cell_calue / 1000)** to convert back to a float.
+    - You can now clip this feature class to your area of interest, and then **merge** the proxyTHLB feature class with the provincial thlb feature class. Make sure that you are usig the appropriatie field mappings during ther merge.
+
+>[!Note]
+>Some clients have additional requests for their THLB analysis. For example, they may like to see the impact of their WHA divided by which Timber Supply Area or TFL they are in. In the identify steps below, you can repeat the process with the necessary feature classes. 
+
+**Identify Overlaps**
+4. Use the **identify** tool with your input polygons (eg, the WHAs) and your merged thlb feature class. Your output should resemble the original input polygons, but have many "slivers". Each sliver should have an associated **thlb_fact** value. 
+5. Add 2 new float fields to your feature class: ["area_ha", "thlb_area"]. Use the **Calculate Geometry** function for the "area_ha" field and determind the area in hectares. Then use the **Calculate Field** tool on the "thlb_area" and use the function **!area_ha * !thlb_fact**. 
+
+**Summary Statistics**
+6. Use the **Summary Statistics** function to create your data output. Choose "thlb_area" as your statistics field (and any other fields required) and ensure the method is set to **SUM**. Case Fields are optional, but in the case of this analysis, be sure to select the field containing the unique identifer of the proposed WHAs. 
+7. Always perform a manual review of the table dataset with the cartographic represention of THLB to ensure the results intuitively make sense. 
+8. (optional) Join the resulting summary statistcs table back to the original input polygon to attach the summary results back to the proposed WHAs.
+
+>[!Important]
+>The process above described the basic steps to perform a THLB analysis request. It is not uncommon for clients to want more detailed information. For example, a client might want to know the breakdown of THLB impact baed on Mature/Immature Forests (which uses the VRI Proj_Age_1 attribute), The breakdown by different administrative areas, and the breakdown by Old Growth Defferal Area (OGDA) or Non-OGDA. These requests can by accomodated by performing additional **Identify** functins and then including those categories in the **CASE** section of the **Summary Statistics** tool.
 
 <!-- 
 - Sapsucker
