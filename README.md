@@ -15,18 +15,24 @@ areas.
 ## THLB Data
 The location of THLB can be found through an internal local directory as an ESRI
 file geodatabase or via a [file transfer protocol (ftp) page](https://www.for.gov.bc.ca/ftp/HTS/external/!publish/DataCatalogue_FAIB_Data/THLB/). The internal file geodatabase is preferred for this analysis as it is
-seamless. The ftp links have been separated into Timber Supply Area / Timber
-Farm License areas due to size limitations. 
+seamless (not divided by Timber Supply Area). The ftp links have been separated 
+into Timber Supply Area / Timber Farm License areas due to size limitations. 
 
 >[!Note]
 ><strong>Tree Farm Licences (TFL) </strong>are area-based tenures which grant nearly exclusive rights to harvest timber and manage forests on a specified area of land.><br />
 ><br />
 ><strong>Timber Supply Areas (TSA) </strong>are geographically defined areas used for timver supply planning. Harvesting rights are allocated through volume-based tenures such as Forest Licences rather than exclusive area based rights. 
+><br />
 
-The THLB Data comes in polygon format and contains several unique fields, most notably:
+[Tree Farm Licence](https://www2.gov.bc.ca/gov/content/industry/forestry/forest-tenures/timber-harvesting-rights/tfl) holders (aka, Licencees) have their own process for determining THLB within those areas. Until very recently, those THLB calculations have not been made available to the provincial government. This has made conservation planning difficult. In order to get an impression of THLB within the TFL areas, [Forest Analysis and Inventory Branch (FAIB)](https://www2.gov.bc.ca/gov/content/industry/forestry/managing-our-forest-resources/forest-inventory) has created a raster product called the 'proxyTHLB'. Each pixel in the 'proxyTHLB' is 1 square hectare and the pixel values represent the thlb_factor. This product is not published, but access can be requested by reaching out to FAIB.
+
+The Provincial THLB Data comes in polygon format and contains several unique fields, most notably:
 - **thlb_fact**: A Float Value, between 0 and 1, representing the amount of forest within the associated polygon which contains harvestable timber. For example, a polygon with a tblb_fact of 0.75 would contain 75% harvestable timber.
 - **tsr_report_year**: The year that the polygon was created as part of a Timber Supply Review, which must be completed at least every 10 years. It is good practive to review this data to ensure data currency.
 - **thlb_area_ha**: This is the area of the polygon multiplied by the thlb_fact and should represent the amount of harvestable land in hectares within the associated polygon.
+
+The proxyTHLB Data comes in raster format and contains just the single value:
+- **thlb_fact**: A Float Value, between 0 and 1, representing the amount of forest within the associated polygon which contains harvestable timber. For example, a 1ha pixel with a tblb_fact of 0.75 would contain 0.75ha of merchantable timber.
 
 
 In addition to the THLB data, you will require **input geometries** (ie, your
